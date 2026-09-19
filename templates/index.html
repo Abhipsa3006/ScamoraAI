@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SCAMORA AI</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+
+        <!-- =========================
+             HEADER
+        ========================== -->
+
+        <header class="hero">
+
+            <div class="logo-icon">🛡️</div>
+
+            <h1>SCAMORA AI</h1>
+
+            <p>
+                Explainable AI for Phishing, Scam & Malicious Message Detection
+            </p>
+
+        </header>
+
+
+
+        <!-- =========================
+             SECURITY OVERVIEW
+        ========================== -->
+
+        <section class="overview-card">
+
+            <div class="overview-header">
+
+                <div>
+
+                    <h2>📊 Security Overview</h2>
+
+                    <p>
+                        Your SCAMORA AI detection statistics
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="overview-grid">
+
+
+                <!-- MESSAGES ANALYZED -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        🔍
+                    </div>
+
+                    <div>
+
+                        <p>Messages Analyzed</p>
+
+                        <h3 id="totalAnalyzed">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- THREATS DETECTED -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        🚨
+                    </div>
+
+                    <div>
+
+                        <p>Threats Detected</p>
+
+                        <h3 id="threatsDetected">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SAFE MESSAGES -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        🛡️
+                    </div>
+
+                    <div>
+
+                        <p>Safe Messages</p>
+
+                        <h3 id="safeMessages">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- AVERAGE RISK -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        📈
+                    </div>
+
+                    <div>
+
+                        <p>Average Risk</p>
+
+                        <h3>
+                            <span id="averageRisk">
+                                0
+                            </span>/100
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             INPUT CARD
+        ========================== -->
+
+        <section class="input-card">
+
+            <h2>🔍 Analyze a Message</h2>
+
+            <p class="input-description">
+
+                Paste an SMS, WhatsApp message, email or suspicious
+                digital message below.
+
+            </p>
+
+
+            <textarea
+                id="message"
+                placeholder="Example: URGENT! Your bank account will be blocked. Verify your account immediately..."
+            ></textarea>
+
+
+
+            <!-- BUTTONS -->
+
+            <div class="button-group">
+
+                <button
+                    onclick="analyzeMessage()"
+                    id="analyzeButton"
+                >
+                    🔍 Analyze Message
+                </button>
+
+
+                <button
+                    onclick="clearAnalysis()"
+                    id="clearButton"
+                >
+                    ↻ Clear Analysis
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             DEMO EXAMPLES
+        ========================== -->
+
+        <section class="input-card demo-card">
+
+            <h2>🧪 Try an Example</h2>
+
+            <p class="input-description">
+
+                Select a sample message to see how SCAMORA AI
+                analyzes different types of digital messages.
+
+            </p>
+
+
+            <div class="demo-buttons">
+
+
+                <button
+                    class="demo-button safe-demo"
+                    onclick="useExample('safe')"
+                >
+                    🟢 Safe Message
+                </button>
+
+
+                <button
+                    class="demo-button scam-demo"
+                    onclick="useExample('scam')"
+                >
+                    🟠 Scam Message
+                </button>
+
+
+                <button
+                    class="demo-button phishing-demo"
+                    onclick="useExample('phishing')"
+                >
+                    🔴 Phishing Message
+                </button>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             RESULTS
+        ========================== -->
+
+        <section
+            id="result"
+            class="result-card hidden"
+        >
+
+
+            <!-- SCORE + THREAT -->
+
+            <div class="score-section">
+
+
+                <!-- RISK SCORE -->
+
+                <div class="result-box">
+
+                    <p>Risk Score</p>
+
+                    <div class="score-number">
+
+                        <span id="riskScore">
+                            0
+                        </span>
+
+                        <small>/100</small>
+
+                    </div>
+
+
+                    <div class="risk-bar">
+
+                        <div
+                            id="riskBar"
+                            class="risk-fill"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- THREAT LEVEL -->
+
+                <div class="result-box threat-box">
+
+                    <p>Threat Level</p>
+
+                    <h2 id="threatLevel">
+                        -
+                    </h2>
+
+                    <span class="status-dot"></span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================
+                 CLASSIFICATION
+            ========================== -->
+
+            <div class="classification">
+
+                <p>Classification</p>
+
+                <h2 id="classification">
+                    -
+                </h2>
+
+            </div>
+
+
+
+            <!-- =========================
+                 AI CONFIDENCE
+            ========================== -->
+
+            <div class="classification">
+
+                <p>AI Model Confidence</p>
+
+                <h2>
+
+                    <span id="aiConfidence">
+                        0
+                    </span>%
+
+                </h2>
+
+                <p class="input-description">
+
+                    Confidence of the machine-learning model
+                    in its prediction.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 RED FLAGS
+            ========================== -->
+
+            <div class="section">
+
+                <h3>
+                    🚩 Red Flags Detected
+                </h3>
+
+                <ul id="redFlags"></ul>
+
+            </div>
+
+
+
+            <!-- =========================
+                 WHY
+            ========================== -->
+
+            <div class="section explanation">
+
+                <h3>
+                    💡 Why was this flagged?
+                </h3>
+
+                <p id="why"></p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 RECOMMENDATION
+            ========================== -->
+
+            <div class="section recommendation">
+
+                <h3>
+                    🛡️ Safety Recommendation
+                </h3>
+
+                <p id="recommendation"></p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 URLS
+            ========================== -->
+
+            <div class="section">
+
+                <h3>
+                    🔗 Detected URLs
+                </h3>
+
+                <ul id="urls"></ul>
+
+            </div>
+
+
+
+            <!-- =========================
+                 FOOTER
+            ========================== -->
+
+            <div class="result-footer">
+
+                <span>🤖 AI Analysis</span>
+
+                <span>•</span>
+
+                <span>Explainable Detection</span>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             DETECTION HISTORY
+        ========================== -->
+
+        <section
+            id="history"
+            class="input-card history-card"
+        >
+
+            <div class="history-header">
+
+                <div>
+
+                    <h2>📋 Detection History</h2>
+
+                    <p class="input-description">
+                        Recent messages analyzed by SCAMORA AI.
+                    </p>
+
+                </div>
+
+
+                <button
+                    onclick="clearHistory()"
+                    id="clearHistoryButton"
+                >
+                    Clear History
+                </button>
+
+            </div>
+
+
+            <div id="historyList">
+
+                <p class="empty-history">
+                    No messages analyzed yet.
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="/static/script.js"></script>
+
+</body>
+
+</html>

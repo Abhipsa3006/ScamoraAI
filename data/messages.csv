@@ -1,0 +1,79 @@
+text,label
+"URGENT! Your bank account will be blocked. Verify your account immediately.",phishing
+"Your account has been suspended. Click the link to restore access.",phishing
+"Security alert! Confirm your password immediately.",phishing
+"Your KYC has expired. Verify your identity now.",phishing
+"Your bank account requires immediate verification.",phishing
+"Your debit card has been blocked. Login to reactivate it.",phishing
+"Your UPI account will be suspended unless you verify now.",phishing
+"Unusual login detected. Verify your account immediately.",phishing
+"Your internet banking access will expire today. Confirm your details.",phishing
+"Your account security has been compromised. Login now to secure it.",phishing
+"Verify your bank account within 24 hours to avoid suspension.",phishing
+"Your card will be permanently blocked. Update your information now.",phishing
+"Important security notice. Confirm your banking credentials immediately.",phishing
+"Your account has unusual activity. Click the link to verify.",phishing
+"Your net banking account needs verification. Login immediately.",phishing
+"Your KYC verification is pending. Complete it now to avoid account closure.",phishing
+"Security warning! Your account will be locked unless you verify your identity.",phishing
+"Your bank profile requires an urgent security update.",phishing
+"Confirm your account details immediately to prevent service interruption.",phishing
+"Your banking session has expired. Sign in again to restore access.",phishing
+"Your account has been flagged for suspicious activity. Verify now.",phishing
+"Click the secure link to confirm your bank account information.",phishing
+"Your card verification failed. Update your details immediately.",phishing
+"Your mobile banking service will be disabled unless you verify your account.",phishing
+"Please confirm your login details to prevent your account from being blocked.",phishing
+"Your account requires urgent identity verification.",phishing
+"Your bank has detected suspicious activity. Login to verify.",phishing
+"Verify your banking information immediately using the provided link.",phishing
+"Your account access is restricted. Complete verification to restore access.",phishing
+"Your banking account will be closed if verification is not completed today.",phishing
+
+"Congratulations! You have won a cash prize. Click here to claim it.",scam
+"You have been selected for a free gift. Claim it now.",scam
+"WIN ₹50,000 NOW! Click here and claim your prize.",scam
+"You have won a lottery. Pay a small processing fee to receive your money.",scam
+"Congratulations! You are today's lucky winner. Send your details to receive the prize.",scam
+"Earn ₹5,000 every day from home. Pay ₹999 registration fee to start.",scam
+"Exclusive investment opportunity! Deposit money today for guaranteed returns.",scam
+"Double your money in 24 hours. Transfer funds now to activate your account.",scam
+"Your prize will expire today. Pay the processing fee immediately.",scam
+"Send your OTP and UPI PIN to complete the reward verification.",scam
+"You have received a special cash reward. Pay ₹500 to unlock it.",scam
+"Congratulations! Claim your free smartphone by paying a small delivery fee.",scam
+"Limited offer! Invest ₹1,000 and receive ₹10,000 guaranteed.",scam
+"You are eligible for a government reward. Pay a processing charge to receive it.",scam
+"Your lottery winnings are ready. Send your bank details to receive the money.",scam
+"Get a free gift voucher today. Click the link and enter your details.",scam
+"You have been chosen for a special bonus. Pay the verification fee now.",scam
+"Congratulations! You won ₹1,00,000. Pay the tax fee to release your prize.",scam
+"Work from home and earn ₹10,000 daily. Pay a registration fee to join.",scam
+"Claim your exclusive cashback reward by paying a small processing fee.",scam
+"Your refund is waiting. Send your UPI details to receive the money.",scam
+"Congratulations! Your lucky draw prize is ready. Pay the delivery charge.",scam
+"Invest today and double your money with zero risk.",scam
+"Free recharge available! Click now and enter your payment details.",scam
+"You have won an expensive gift. Pay ₹300 to receive your package.",scam
+"Special government scheme! Pay a small fee to receive ₹50,000.",scam
+"Your reward account has been selected for a cash bonus. Claim now.",scam
+"Congratulations! You are eligible for a premium reward. Verify your payment details.",scam
+"Instant loan approved! Pay the processing fee to receive the money.",scam
+"Exclusive job opportunity! Pay ₹999 to secure your position.",scam
+
+"Hey, are you coming to college tomorrow? The class starts at 10 AM.",safe
+"Can you send me the assignment?",safe
+"Let's meet tomorrow at 5 PM.",safe
+"Please call me when you reach home.",safe
+"Your package has been delivered successfully.",safe
+"Your order has been shipped and will arrive tomorrow.",safe
+"Mom asked me to buy some groceries.",safe
+"I will reach college by 9 AM.",safe
+"Don't forget to bring your notebook tomorrow.",safe
+"Can you send me today's class notes?",safe
+"Your exam starts at 10 AM on Monday.",safe
+"Let's have lunch after class.",safe
+"I have sent you the project file.",safe
+"Please remind me about the meeting tomorrow.",safe
+"Your college bus will arrive at 8 AM.",safe
+"I will call you after I finish my work.",safe
