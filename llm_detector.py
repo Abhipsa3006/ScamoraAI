@@ -48,6 +48,7 @@ Analyze digital messages for:
 - delivery scams
 - account verification scams
 - social engineering
+- fakenews and disinformation
 
 Analyze the complete context of the message.
 
@@ -169,7 +170,7 @@ Do not invent sources.
 
     completion = client.chat.completions.create(
 
-        model="groq/compound",
+        model="qwen/qwen3.8-27b",
 
         messages=[
             {
@@ -186,7 +187,7 @@ Do not invent sources.
 
         # Keep the response comfortably below
         # the model context limit.
-        max_completion_tokens=1500,
+        max_completion_tokens=500,
 
         top_p=1,
 

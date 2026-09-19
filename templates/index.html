@@ -9,489 +9,3127 @@
 
     <title>SCAMORA AI</title>
 
-    <link rel="stylesheet" href="/static/style.css">
+
+    <style>
+
+        /* =========================================
+           GLOBAL
+        ========================================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    #172033 0%,
+                    #0b1120 45%,
+                    #060b14 100%
+                );
+
+            color: #f8fafc;
+
+            min-height: 100vh;
+
+            line-height: 1.6;
+        }
+
+
+        button,
+        textarea {
+
+            font-family: inherit;
+
+        }
+
+
+        button {
+
+            cursor: pointer;
+
+        }
+
+
+        .container {
+
+            width: min(1100px, 92%);
+
+            margin: 0 auto;
+
+            padding: 40px 0 70px;
+
+        }
+
+
+        .hidden {
+
+            display: none !important;
+
+        }
+
+
+        /* =========================================
+           HEADER
+        ========================================= */
+
+        .hero {
+
+            text-align: center;
+
+            padding: 35px 20px 45px;
+
+        }
+
+
+        .logo-icon {
+
+            font-size: 52px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .hero h1 {
+
+            font-size: clamp(34px, 6vw, 56px);
+
+            font-weight: 800;
+
+            letter-spacing: -1px;
+
+            color: #a78bfa;
+
+        }
+
+        .hero p {
+
+            color: #94a3b8;
+
+            margin-top: 10px;
+
+            font-size: 16px;
+
+        }
+
+
+        /* =========================================
+           COMMON CARD
+        ========================================= */
+
+        .overview-card,
+        .input-card,
+        .result-card {
+
+            background:
+                rgba(15, 23, 42, 0.86);
+
+            border:
+                1px solid rgba(148, 163, 184, 0.14);
+
+            border-radius: 22px;
+
+            padding: 28px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.25);
+
+            backdrop-filter: blur(14px);
+
+        }
+
+
+        .overview-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 22px;
+
+        }
+
+
+        h2 {
+
+            font-size: 22px;
+
+        }
+
+
+        .input-description {
+
+            color: #94a3b8;
+
+            margin-top: 6px;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =========================================
+           SECURITY OVERVIEW
+        ========================================= */
+
+        .overview-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 15px;
+
+        }
+
+
+        .stat-card {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 20px;
+
+            border-radius: 16px;
+
+            background:
+                rgba(30, 41, 59, 0.65);
+
+            border:
+                1px solid rgba(148, 163, 184, 0.12);
+
+        }
+
+
+        .stat-icon {
+
+            font-size: 28px;
+
+        }
+
+
+        .stat-card p {
+
+            color: #94a3b8;
+
+            font-size: 13px;
+
+        }
+
+
+        .stat-card h3 {
+
+            font-size: 25px;
+
+            margin-top: 3px;
+
+        }
+
+
+        /* =========================================
+           INPUT
+        ========================================= */
+
+        textarea {
+
+            width: 100%;
+
+            min-height: 170px;
+
+            margin-top: 20px;
+
+            padding: 18px;
+
+            resize: vertical;
+
+            border-radius: 14px;
+
+            border:
+                1px solid #334155;
+
+            background:
+                #080f1d;
+
+            color: #f8fafc;
+
+            outline: none;
+
+            font-size: 15px;
+
+            line-height: 1.6;
+
+        }
+
+
+        textarea:focus {
+
+            border-color: #6366f1;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(99, 102, 241, 0.15);
+
+        }
+
+
+        textarea::placeholder {
+
+            color: #64748b;
+
+        }
+
+
+        /* =========================================
+           BUTTONS
+        ========================================= */
+
+        .button-group {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 12px;
+
+            margin-top: 18px;
+
+        }
+
+
+        .button-group button {
+
+            border: none;
+
+            border-radius: 12px;
+
+            padding: 13px 20px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            transition:
+                transform 0.2s,
+                opacity 0.2s;
+
+        }
+
+
+        .button-group button:hover {
+
+            transform: translateY(-2px);
+
+        }
+
+
+        .button-group button:disabled {
+
+            opacity: 0.55;
+
+            cursor: not-allowed;
+
+            transform: none;
+
+        }
+
+
+        #analyzeButton {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #4f46e5
+                );
+
+            color: white;
+
+        }
+
+
+        #llmButton {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7c3aed,
+                    #a855f7
+                );
+
+            color: white;
+
+        }
+
+
+        #clearButton {
+
+            background:
+                #1e293b;
+
+            color: #cbd5e1;
+
+            border:
+                1px solid #334155;
+
+        }
+
+
+        /* =========================================
+           DEMO BUTTONS
+        ========================================= */
+
+        .demo-buttons {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 12px;
+
+            margin-top: 18px;
+
+        }
+
+
+        .demo-button {
+
+            padding: 11px 16px;
+
+            border-radius: 10px;
+
+            border:
+                1px solid #334155;
+
+            background:
+                #111827;
+
+            color: #e2e8f0;
+
+            font-weight: 600;
+
+            transition: 0.2s;
+
+        }
+
+
+        .demo-button:hover {
+
+            transform: translateY(-2px);
+
+        }
+
+
+        /* =========================================
+           RESULTS
+        ========================================= */
+
+        .score-section {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 18px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .result-box {
+
+            background:
+                rgba(30, 41, 59, 0.65);
+
+            border:
+                1px solid rgba(148, 163, 184, 0.12);
+
+            border-radius: 16px;
+
+            padding: 22px;
+
+        }
+
+
+        .result-box > p {
+
+            color: #94a3b8;
+
+            font-size: 14px;
+
+        }
+
+
+        .score-number {
+
+            font-size: 48px;
+
+            font-weight: 800;
+
+            margin: 5px 0 12px;
+
+        }
+
+
+        .score-number small {
+
+            font-size: 18px;
+
+            color: #64748b;
+
+        }
+
+
+        .risk-bar {
+
+            width: 100%;
+
+            height: 9px;
+
+            background: #1e293b;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+        }
+
+
+        .risk-fill {
+
+            width: 0%;
+
+            height: 100%;
+
+            border-radius: 20px;
+
+            transition:
+                width 0.8s ease;
+
+            background: #6366f1;
+
+        }
+
+
+        .threat-box {
+
+            position: relative;
+
+        }
+
+
+        .threat-box h2 {
+
+            font-size: 32px;
+
+            margin-top: 12px;
+
+        }
+
+
+        .status-dot {
+
+            display: inline-block;
+
+            width: 12px;
+
+            height: 12px;
+
+            border-radius: 50%;
+
+            background: #22c55e;
+
+            margin-top: 12px;
+
+        }
+
+
+        .classification {
+
+            padding: 20px;
+
+            margin-bottom: 18px;
+
+            background:
+                rgba(30, 41, 59, 0.55);
+
+            border-radius: 15px;
+
+        }
+
+
+        .classification p:first-child {
+
+            color: #94a3b8;
+
+            font-size: 14px;
+
+        }
+
+
+        .classification h2 {
+
+            margin-top: 5px;
+
+            font-size: 27px;
+
+        }
+
+
+        /* =========================================
+           RESULT SECTIONS
+        ========================================= */
+
+        .section {
+
+            margin-top: 20px;
+
+            padding: 20px;
+
+            background:
+                rgba(15, 23, 42, 0.65);
+
+            border-radius: 15px;
+
+            border:
+                1px solid rgba(148, 163, 184, 0.1);
+
+        }
+
+
+        .section h3 {
+
+            font-size: 16px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .section p {
+
+            color: #cbd5e1;
+
+            font-size: 14px;
+
+        }
+
+
+        .section ul {
+
+            list-style: none;
+
+        }
+
+
+        .section li {
+
+            padding: 8px 0;
+
+            color: #cbd5e1;
+
+            font-size: 14px;
+
+            border-bottom:
+                1px solid rgba(148, 163, 184, 0.07);
+
+        }
+
+
+        .section li:last-child {
+
+            border-bottom: none;
+
+        }
+
+
+        .explanation {
+
+            border-left:
+                4px solid #6366f1;
+
+        }
+
+
+        .recommendation {
+
+            border-left:
+                4px solid #22c55e;
+
+        }
+
+
+        /* =========================================
+           LLM HEADER
+        ========================================= */
+
+        .llm-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .llm-badge {
+
+            padding: 8px 14px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            letter-spacing: 0.7px;
+
+            background:
+                rgba(168, 85, 247, 0.15);
+
+            color: #c084fc;
+
+            border:
+                1px solid
+                rgba(168, 85, 247, 0.3);
+
+            white-space: nowrap;
+
+        }
+
+
+        #llmSources a {
+
+            color: #a78bfa;
+
+            text-decoration: none;
+
+            word-break: break-all;
+
+        }
+
+
+        #llmSources a:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* =========================================
+           HISTORY
+        ========================================= */
+
+        .history-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        #clearHistoryButton {
+
+            padding: 10px 15px;
+
+            border-radius: 10px;
+
+            border:
+                1px solid #334155;
+
+            background:
+                #111827;
+
+            color: #cbd5e1;
+
+            cursor: pointer;
+
+        }
+
+
+        .history-item {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+            padding: 18px;
+
+            margin-bottom: 12px;
+
+            border-radius: 14px;
+
+            background:
+                rgba(30, 41, 59, 0.6);
+
+            border:
+                1px solid rgba(148, 163, 184, 0.1);
+
+        }
+
+
+        .history-message {
+
+            color: #f8fafc;
+
+            font-size: 15px;
+
+            line-height: 1.5;
+
+            margin-bottom: 8px;
+
+            max-height: 45px;
+
+            overflow: hidden;
+
+        }
+
+
+        .history-meta {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 15px;
+
+            color: #64748b;
+
+            font-size: 12px;
+
+        }
+
+
+        .history-result {
+
+            text-align: right;
+
+            min-width: 110px;
+
+        }
+
+
+        .history-result strong {
+
+            display: block;
+
+            margin-top: 6px;
+
+        }
+
+
+        .history-class {
+
+            display: inline-block;
+
+            padding: 5px 9px;
+
+            border-radius: 8px;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+        }
+
+
+        .history-class.safe {
+
+            background:
+                rgba(34, 197, 94, 0.12);
+
+            color: #4ade80;
+
+        }
+
+
+        .history-class.medium {
+
+            background:
+                rgba(245, 158, 11, 0.12);
+
+            color: #fbbf24;
+
+        }
+
+
+        .history-class.high {
+
+            background:
+                rgba(239, 68, 68, 0.12);
+
+            color: #f87171;
+
+        }
+
+
+        .empty-history {
+
+            text-align: center;
+
+            color: #64748b;
+
+            padding: 25px;
+
+        }
+
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        .result-footer {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            margin-top: 25px;
+
+            color: #64748b;
+
+            font-size: 12px;
+
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 800px) {
+
+            .overview-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .container {
+
+                width: 94%;
+
+                padding-top: 20px;
+
+            }
+
+
+            .overview-card,
+            .input-card,
+            .result-card {
+
+                padding: 20px;
+
+                border-radius: 17px;
+
+            }
+
+
+            .overview-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .score-section {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .history-item {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+            }
+
+
+            .history-result {
+
+                text-align: left;
+
+            }
+
+
+            .history-header {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+            }
+
+
+            .llm-header {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+            }
+
+
+            .button-group {
+
+                flex-direction: column;
+
+            }
+
+
+            .button-group button {
+
+                width: 100%;
+
+            }
+
+        }
+
+    </style>
 
 </head>
 
 
 <body>
 
-    <div class="container">
+
+<div class="container">
 
 
-        <!-- =========================
-             HEADER
-        ========================== -->
+    <!-- =========================================
+         HEADER
+    ========================================== -->
 
-        <header class="hero">
+    <header class="hero">
 
-            <div class="logo-icon">🛡️</div>
+        <div class="logo-icon">
+            🛡️
+        </div>
 
-            <h1>SCAMORA AI</h1>
+        <h1>
+            SCAMORA AI
+        </h1>
 
-            <p>
-                Explainable AI for Phishing, Scam & Malicious Message Detection
-            </p>
+        <p>
+            Explainable AI for Phishing, Scam &
+            Malicious Message Detection
+        </p>
 
-        </header>
+    </header>
 
 
+    <!-- =========================================
+         SECURITY OVERVIEW
+    ========================================== -->
 
-        <!-- =========================
-             SECURITY OVERVIEW
-        ========================== -->
+    <section class="overview-card">
 
-        <section class="overview-card">
+        <div class="overview-header">
 
-            <div class="overview-header">
+            <div>
+
+                <h2>
+                    📊 Security Overview
+                </h2>
+
+                <p class="input-description">
+                    Your SCAMORA AI detection statistics
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="overview-grid">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🔍
+                </div>
 
                 <div>
 
-                    <h2>📊 Security Overview</h2>
-
                     <p>
-                        Your SCAMORA AI detection statistics
+                        Messages Analyzed
                     </p>
 
+                    <h3 id="totalAnalyzed">
+                        0
+                    </h3>
+
                 </div>
 
             </div>
 
 
-            <div class="overview-grid">
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🚨
+                </div>
+
+                <div>
+
+                    <p>
+                        Threats Detected
+                    </p>
+
+                    <h3 id="threatsDetected">
+                        0
+                    </h3>
+
+                </div>
+
+            </div>
 
 
-                <!-- MESSAGES ANALYZED -->
+            <div class="stat-card">
 
-                <div class="stat-card">
+                <div class="stat-icon">
+                    🛡️
+                </div>
 
-                    <div class="stat-icon">
-                        🔍
-                    </div>
+                <div>
 
-                    <div>
+                    <p>
+                        Safe Messages
+                    </p>
 
-                        <p>Messages Analyzed</p>
+                    <h3 id="safeMessages">
+                        0
+                    </h3>
 
-                        <h3 id="totalAnalyzed">
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📈
+                </div>
+
+                <div>
+
+                    <p>
+                        Average Risk
+                    </p>
+
+                    <h3>
+                        <span id="averageRisk">
                             0
-                        </h3>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- THREATS DETECTED -->
-
-                <div class="stat-card">
-
-                    <div class="stat-icon">
-                        🚨
-                    </div>
-
-                    <div>
-
-                        <p>Threats Detected</p>
-
-                        <h3 id="threatsDetected">
-                            0
-                        </h3>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- SAFE MESSAGES -->
-
-                <div class="stat-card">
-
-                    <div class="stat-icon">
-                        🛡️
-                    </div>
-
-                    <div>
-
-                        <p>Safe Messages</p>
-
-                        <h3 id="safeMessages">
-                            0
-                        </h3>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- AVERAGE RISK -->
-
-                <div class="stat-card">
-
-                    <div class="stat-icon">
-                        📈
-                    </div>
-
-                    <div>
-
-                        <p>Average Risk</p>
-
-                        <h3>
-                            <span id="averageRisk">
-                                0
-                            </span>/100
-                        </h3>
-
-                    </div>
-
-                </div>
-
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =========================
-             INPUT CARD
-        ========================== -->
-
-        <section class="input-card">
-
-            <h2>🔍 Analyze a Message</h2>
-
-            <p class="input-description">
-
-                Paste an SMS, WhatsApp message, email or suspicious
-                digital message below.
-
-            </p>
-
-
-            <textarea
-                id="message"
-                placeholder="Example: URGENT! Your bank account will be blocked. Verify your account immediately..."
-            ></textarea>
-
-
-
-            <!-- BUTTONS -->
-
-            <div class="button-group">
-
-                <button
-                    onclick="analyzeMessage()"
-                    id="analyzeButton"
-                >
-                    🔍 Analyze Message
-                </button>
-
-
-                <button
-                    onclick="clearAnalysis()"
-                    id="clearButton"
-                >
-                    ↻ Clear Analysis
-                </button>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =========================
-             DEMO EXAMPLES
-        ========================== -->
-
-        <section class="input-card demo-card">
-
-            <h2>🧪 Try an Example</h2>
-
-            <p class="input-description">
-
-                Select a sample message to see how SCAMORA AI
-                analyzes different types of digital messages.
-
-            </p>
-
-
-            <div class="demo-buttons">
-
-
-                <button
-                    class="demo-button safe-demo"
-                    onclick="useExample('safe')"
-                >
-                    🟢 Safe Message
-                </button>
-
-
-                <button
-                    class="demo-button scam-demo"
-                    onclick="useExample('scam')"
-                >
-                    🟠 Scam Message
-                </button>
-
-
-                <button
-                    class="demo-button phishing-demo"
-                    onclick="useExample('phishing')"
-                >
-                    🔴 Phishing Message
-                </button>
-
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =========================
-             RESULTS
-        ========================== -->
-
-        <section
-            id="result"
-            class="result-card hidden"
-        >
-
-
-            <!-- SCORE + THREAT -->
-
-            <div class="score-section">
-
-
-                <!-- RISK SCORE -->
-
-                <div class="result-box">
-
-                    <p>Risk Score</p>
-
-                    <div class="score-number">
-
-                        <span id="riskScore">
-                            0
-                        </span>
-
-                        <small>/100</small>
-
-                    </div>
-
-
-                    <div class="risk-bar">
-
-                        <div
-                            id="riskBar"
-                            class="risk-fill"
-                        ></div>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- THREAT LEVEL -->
-
-                <div class="result-box threat-box">
-
-                    <p>Threat Level</p>
-
-                    <h2 id="threatLevel">
-                        -
-                    </h2>
-
-                    <span class="status-dot"></span>
+                        </span>/100
+                    </h3>
 
                 </div>
 
             </div>
 
 
+        </div>
 
-            <!-- =========================
-                 CLASSIFICATION
-            ========================== -->
+    </section>
 
-            <div class="classification">
 
-                <p>Classification</p>
+    <!-- =========================================
+         MESSAGE INPUT
+    ========================================== -->
 
-                <h2 id="classification">
+    <section class="input-card">
+
+        <h2>
+            🔍 Analyze a Message
+        </h2>
+
+        <p class="input-description">
+
+            Paste an SMS, WhatsApp message, email or
+            suspicious digital message below.
+
+        </p>
+
+
+        <textarea
+            id="message"
+            placeholder="Example: URGENT! Your bank account will be blocked. Verify your account immediately..."
+        ></textarea>
+
+
+        <div class="button-group">
+
+            <button
+                onclick="analyzeMessage()"
+                id="analyzeButton"
+            >
+                🔍 ML Analysis
+            </button>
+
+
+            <button
+                onclick="analyzeLLM()"
+                id="llmButton"
+            >
+                🧠 AI Security Scan
+            </button>
+
+
+            <button
+                onclick="clearAnalysis()"
+                id="clearButton"
+            >
+                ↻ Clear
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         DEMO EXAMPLES
+    ========================================== -->
+
+    <section class="input-card">
+
+        <h2>
+            🧪 Try an Example
+        </h2>
+
+        <p class="input-description">
+
+            Select a sample message to test SCAMORA AI.
+
+        </p>
+
+
+        <div class="demo-buttons">
+
+            <button
+                class="demo-button"
+                onclick="useExample('safe')"
+            >
+                🟢 Safe Message
+            </button>
+
+
+            <button
+                class="demo-button"
+                onclick="useExample('scam')"
+            >
+                🟠 Scam Message
+            </button>
+
+
+            <button
+                class="demo-button"
+                onclick="useExample('phishing')"
+            >
+                🔴 Phishing Message
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         ML RESULT
+    ========================================== -->
+
+    <section
+        id="result"
+        class="result-card hidden"
+    >
+
+        <h2>
+            🤖 Machine Learning Analysis
+        </h2>
+
+
+        <p class="input-description">
+            TF-IDF + Logistic Regression + security rules
+        </p>
+
+
+        <div class="score-section"
+             style="margin-top:25px;">
+
+
+            <div class="result-box">
+
+                <p>
+                    Risk Score
+                </p>
+
+                <div class="score-number">
+
+                    <span id="riskScore">
+                        0
+                    </span>
+
+                    <small>
+                        /100
+                    </small>
+
+                </div>
+
+
+                <div class="risk-bar">
+
+                    <div
+                        id="riskBar"
+                        class="risk-fill"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="result-box threat-box">
+
+                <p>
+                    Threat Level
+                </p>
+
+                <h2 id="threatLevel">
                     -
                 </h2>
 
+                <span
+                    class="status-dot"
+                    id="statusDot"
+                ></span>
+
             </div>
 
 
+        </div>
 
-            <!-- =========================
-                 AI CONFIDENCE
-            ========================== -->
 
-            <div class="classification">
+        <div class="classification">
 
-                <p>AI Model Confidence</p>
+            <p>
+                Classification
+            </p>
+
+            <h2 id="classification">
+                -
+            </h2>
+
+        </div>
+
+
+        <div class="classification">
+
+            <p>
+                AI Model Confidence
+            </p>
+
+            <h2>
+
+                <span id="aiConfidence">
+                    0
+                </span>%
+
+            </h2>
+
+        </div>
+
+
+        <div class="section">
+
+            <h3>
+                🚩 Red Flags Detected
+            </h3>
+
+            <ul id="redFlags"></ul>
+
+        </div>
+
+
+        <div class="section explanation">
+
+            <h3>
+                💡 Why was this flagged?
+            </h3>
+
+            <p id="why"></p>
+
+        </div>
+
+
+        <div class="section recommendation">
+
+            <h3>
+                🛡️ Safety Recommendation
+            </h3>
+
+            <p id="recommendation"></p>
+
+        </div>
+
+
+        <div class="section">
+
+            <h3>
+                🔗 Detected URLs
+            </h3>
+
+            <ul id="urls"></ul>
+
+        </div>
+
+
+        <div class="result-footer">
+
+            <span>
+                🤖 ML Analysis
+            </span>
+
+            <span>
+                •
+            </span>
+
+            <span>
+                Explainable Detection
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         LLM RESULT
+    ========================================== -->
+
+    <section
+        id="llmResult"
+        class="result-card hidden"
+    >
+
+
+        <div class="llm-header">
+
+            <div>
 
                 <h2>
-
-                    <span id="aiConfidence">
-                        0
-                    </span>%
-
+                    🧠 AI Security Analysis
                 </h2>
 
                 <p class="input-description">
 
-                    Confidence of the machine-learning model
-                    in its prediction.
+                    Groq-powered contextual analysis with
+                    web verification when relevant.
 
                 </p>
 
             </div>
 
 
+            <span class="llm-badge">
+                GROQ AI
+            </span>
 
-            <!-- =========================
-                 RED FLAGS
-            ========================== -->
-
-            <div class="section">
-
-                <h3>
-                    🚩 Red Flags Detected
-                </h3>
-
-                <ul id="redFlags"></ul>
-
-            </div>
+        </div>
 
 
+        <!-- SCORE -->
 
-            <!-- =========================
-                 WHY
-            ========================== -->
-
-            <div class="section explanation">
-
-                <h3>
-                    💡 Why was this flagged?
-                </h3>
-
-                <p id="why"></p>
-
-            </div>
+        <div class="score-section">
 
 
+            <div class="result-box">
 
-            <!-- =========================
-                 RECOMMENDATION
-            ========================== -->
+                <p>
+                    AI Risk Score
+                </p>
 
-            <div class="section recommendation">
+                <div class="score-number">
 
-                <h3>
-                    🛡️ Safety Recommendation
-                </h3>
+                    <span id="llmRiskScore">
+                        0
+                    </span>
 
-                <p id="recommendation"></p>
-
-            </div>
-
-
-
-            <!-- =========================
-                 URLS
-            ========================== -->
-
-            <div class="section">
-
-                <h3>
-                    🔗 Detected URLs
-                </h3>
-
-                <ul id="urls"></ul>
-
-            </div>
-
-
-
-            <!-- =========================
-                 FOOTER
-            ========================== -->
-
-            <div class="result-footer">
-
-                <span>🤖 AI Analysis</span>
-
-                <span>•</span>
-
-                <span>Explainable Detection</span>
-
-            </div>
-
-
-        </section>
-
-
-
-        <!-- =========================
-             DETECTION HISTORY
-        ========================== -->
-
-        <section
-            id="history"
-            class="input-card history-card"
-        >
-
-            <div class="history-header">
-
-                <div>
-
-                    <h2>📋 Detection History</h2>
-
-                    <p class="input-description">
-                        Recent messages analyzed by SCAMORA AI.
-                    </p>
+                    <small>
+                        /100
+                    </small>
 
                 </div>
 
 
-                <button
-                    onclick="clearHistory()"
-                    id="clearHistoryButton"
-                >
-                    Clear History
-                </button>
+                <div class="risk-bar">
+
+                    <div
+                        id="llmRiskBar"
+                        class="risk-fill"
+                    ></div>
+
+                </div>
 
             </div>
 
 
-            <div id="historyList">
+            <div class="result-box threat-box">
 
-                <p class="empty-history">
-                    No messages analyzed yet.
+                <p>
+                    Threat Level
+                </p>
+
+                <h2 id="llmThreatLevel">
+                    -
+                </h2>
+
+                <span
+                    id="llmStatusDot"
+                    class="status-dot"
+                ></span>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- CLASSIFICATION -->
+
+        <div class="classification">
+
+            <p>
+                LLM Classification
+            </p>
+
+            <h2 id="llmClassification">
+                -
+            </h2>
+
+        </div>
+
+
+        <!-- CONFIDENCE -->
+
+        <div class="classification">
+
+            <p>
+                AI Confidence
+            </p>
+
+            <h2>
+
+                <span id="llmConfidence">
+                    0
+                </span>%
+
+            </h2>
+
+        </div>
+
+
+        <!-- RED FLAGS -->
+
+        <div class="section">
+
+            <h3>
+                🚩 Red Flags Detected
+            </h3>
+
+            <ul id="llmRedFlags"></ul>
+
+        </div>
+
+
+        <!-- WHY -->
+
+        <div class="section explanation">
+
+            <h3>
+                💡 Why was this flagged?
+            </h3>
+
+            <p id="llmWhy"></p>
+
+        </div>
+
+
+        <!-- RECOMMENDATION -->
+
+        <div class="section recommendation">
+
+            <h3>
+                🛡️ AI Recommendation
+            </h3>
+
+            <p id="llmRecommendation"></p>
+
+        </div>
+
+
+        <!-- WEB VERIFICATION -->
+
+        <div class="section">
+
+            <h3>
+                🌐 Web Verification
+            </h3>
+
+            <p id="llmWebVerification"></p>
+
+        </div>
+
+
+        <!-- URL ANALYSIS -->
+
+        <div class="section">
+
+            <h3>
+                🔗 URL Analysis
+            </h3>
+
+            <ul id="llmUrls"></ul>
+
+        </div>
+
+
+        <!-- SOURCES -->
+
+        <div class="section">
+
+            <h3>
+                📚 Sources
+            </h3>
+
+            <ul id="llmSources"></ul>
+
+        </div>
+
+
+        <div class="result-footer">
+
+            <span>
+                🧠 Groq LLM
+            </span>
+
+            <span>
+                •
+            </span>
+
+            <span>
+                Contextual AI Analysis
+            </span>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =========================================
+         DETECTION HISTORY
+    ========================================== -->
+
+    <section
+        id="history"
+        class="input-card"
+    >
+
+
+        <div class="history-header">
+
+            <div>
+
+                <h2>
+                    📋 Detection History
+                </h2>
+
+                <p class="input-description">
+                    Recent messages analyzed by SCAMORA AI.
                 </p>
 
             </div>
 
-        </section>
+
+            <button
+                onclick="clearHistory()"
+                id="clearHistoryButton"
+            >
+                Clear History
+            </button>
+
+        </div>
 
 
-    </div>
+        <div id="historyList">
+
+            <p class="empty-history">
+                No messages analyzed yet.
+            </p>
+
+        </div>
 
 
+    </section>
 
-    <!-- JAVASCRIPT -->
 
-    <script src="/static/script.js"></script>
+</div>
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
+
+<script>
+
+
+/* =========================================
+   ML ANALYSIS
+========================================= */
+
+async function analyzeMessage() {
+
+
+    const messageBox =
+        document.getElementById("message");
+
+
+    const button =
+        document.getElementById("analyzeButton");
+
+
+    const message =
+        messageBox.value.trim();
+
+
+    if (!message) {
+
+        alert(
+            "Please enter a message first."
+        );
+
+        return;
+
+    }
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "⏳ Analyzing...";
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                "/analyze",
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+                            message: message
+                        })
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            alert(
+                result.error ||
+                "Something went wrong."
+            );
+
+            return;
+
+        }
+
+
+        document
+            .getElementById("result")
+            .classList
+            .remove("hidden");
+
+
+        document
+            .getElementById("riskScore")
+            .textContent =
+            result.risk_score;
+
+
+        const riskBar =
+            document.getElementById(
+                "riskBar"
+            );
+
+
+        riskBar.style.width = "0%";
+
+
+        setTimeout(() => {
+
+            riskBar.style.width =
+                result.risk_score + "%";
+
+        }, 100);
+
+
+        const threat =
+            document.getElementById(
+                "threatLevel"
+            );
+
+
+        threat.textContent =
+            result.threat_level;
+
+
+        const classification =
+            document.getElementById(
+                "classification"
+            );
+
+
+        classification.textContent =
+            result.classification;
+
+
+        document
+            .getElementById("aiConfidence")
+            .textContent =
+            result.ai_confidence;
+
+
+        const dot =
+            document.getElementById(
+                "statusDot"
+            );
+
+
+        if (
+            result.threat_level === "HIGH"
+        ) {
+
+            dot.style.background =
+                "#ef4444";
+
+            threat.style.color =
+                "#ef4444";
+
+            riskBar.style.background =
+                "#ef4444";
+
+            classification.style.color =
+                "#ef4444";
+
+        }
+
+        else if (
+            result.threat_level === "MEDIUM"
+        ) {
+
+            dot.style.background =
+                "#f59e0b";
+
+            threat.style.color =
+                "#f59e0b";
+
+            riskBar.style.background =
+                "#f59e0b";
+
+            classification.style.color =
+                "#f59e0b";
+
+        }
+
+        else {
+
+            dot.style.background =
+                "#22c55e";
+
+            threat.style.color =
+                "#22c55e";
+
+            riskBar.style.background =
+                "#22c55e";
+
+            classification.style.color =
+                "#22c55e";
+
+        }
+
+
+        const flags =
+            document.getElementById(
+                "redFlags"
+            );
+
+
+        flags.innerHTML = "";
+
+
+        if (
+            !result.red_flags ||
+            result.red_flags.length === 0
+        ) {
+
+            flags.innerHTML =
+                "<li>✓ No major red flags detected</li>";
+
+        }
+
+        else {
+
+            result.red_flags.forEach(
+                flag => {
+
+                    const li =
+                        document.createElement(
+                            "li"
+                        );
+
+                    li.textContent =
+                        "✓ " + flag;
+
+                    flags.appendChild(li);
+
+                }
+            );
+
+        }
+
+
+        document
+            .getElementById("why")
+            .textContent =
+            result.why;
+
+
+        document
+            .getElementById("recommendation")
+            .textContent =
+            result.recommendation;
+
+
+        const urls =
+            document.getElementById(
+                "urls"
+            );
+
+
+        urls.innerHTML = "";
+
+
+        if (
+            !result.urls ||
+            result.urls.length === 0
+        ) {
+
+            urls.innerHTML =
+                "<li>No URLs detected</li>";
+
+        }
+
+        else {
+
+            result.urls.forEach(
+                item => {
+
+                    const li =
+                        document.createElement(
+                            "li"
+                        );
+
+                    li.textContent =
+                        item.url +
+                        " — Risk Score: " +
+                        item.score;
+
+                    urls.appendChild(li);
+
+                }
+            );
+
+        }
+
+
+        saveToHistory(
+            message,
+            result
+        );
+
+
+        updateDashboard();
+
+
+        document
+            .getElementById("result")
+            .scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+    }
+
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Unable to connect to SCAMORA AI."
+        );
+
+    }
+
+
+    finally {
+
+        button.disabled = false;
+
+        button.textContent =
+            "🔍 ML Analysis";
+
+    }
+
+}
+
+
+/* =========================================
+   LLM ANALYSIS
+========================================= */
+
+async function analyzeLLM() {
+
+
+    const messageBox =
+        document.getElementById("message");
+
+
+    const button =
+        document.getElementById("llmButton");
+
+
+    const message =
+        messageBox.value.trim();
+
+
+    if (!message) {
+
+        alert(
+            "Please enter a message first."
+        );
+
+        return;
+
+    }
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "⏳ AI Scanning...";
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                "/llm-analyze",
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+                            message: message
+                        })
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            alert(
+                result.error ||
+                "LLM analysis failed."
+            );
+
+            console.error(
+                result.details
+            );
+
+            return;
+
+        }
+
+
+        document
+            .getElementById("llmResult")
+            .classList
+            .remove("hidden");
+
+
+        /* SCORE */
+
+        document
+            .getElementById("llmRiskScore")
+            .textContent =
+            result.risk_score;
+
+
+        const riskBar =
+            document.getElementById(
+                "llmRiskBar"
+            );
+
+
+        riskBar.style.width = "0%";
+
+
+        setTimeout(() => {
+
+            riskBar.style.width =
+                result.risk_score + "%";
+
+        }, 100);
+
+
+        /* THREAT */
+
+        const threat =
+            document.getElementById(
+                "llmThreatLevel"
+            );
+
+
+        threat.textContent =
+            result.threat_level;
+
+
+        /* CLASSIFICATION */
+
+        const classification =
+            document.getElementById(
+                "llmClassification"
+            );
+
+
+        classification.textContent =
+            result.classification;
+
+
+        /* CONFIDENCE */
+
+        document
+            .getElementById("llmConfidence")
+            .textContent =
+            result.ai_confidence;
+
+
+        /* COLORS */
+
+        const dot =
+            document.getElementById(
+                "llmStatusDot"
+            );
+
+
+        if (
+            result.threat_level === "HIGH"
+        ) {
+
+            dot.style.background =
+                "#ef4444";
+
+            threat.style.color =
+                "#ef4444";
+
+            riskBar.style.background =
+                "#ef4444";
+
+            classification.style.color =
+                "#ef4444";
+
+        }
+
+        else if (
+            result.threat_level === "MEDIUM"
+        ) {
+
+            dot.style.background =
+                "#f59e0b";
+
+            threat.style.color =
+                "#f59e0b";
+
+            riskBar.style.background =
+                "#f59e0b";
+
+            classification.style.color =
+                "#f59e0b";
+
+        }
+
+        else {
+
+            dot.style.background =
+                "#22c55e";
+
+            threat.style.color =
+                "#22c55e";
+
+            riskBar.style.background =
+                "#22c55e";
+
+            classification.style.color =
+                "#22c55e";
+
+        }
+
+
+        /* RED FLAGS */
+
+        const flags =
+            document.getElementById(
+                "llmRedFlags"
+            );
+
+
+        flags.innerHTML = "";
+
+
+        if (
+            !result.red_flags ||
+            result.red_flags.length === 0
+        ) {
+
+            flags.innerHTML =
+                "<li>✓ No major red flags detected</li>";
+
+        }
+
+        else {
+
+            result.red_flags.forEach(
+                flag => {
+
+                    const li =
+                        document.createElement(
+                            "li"
+                        );
+
+                    li.textContent =
+                        "✓ " + flag;
+
+                    flags.appendChild(li);
+
+                }
+            );
+
+        }
+
+
+        /* WHY */
+
+        document
+            .getElementById("llmWhy")
+            .textContent =
+            result.why;
+
+
+        /* RECOMMENDATION */
+
+        document
+            .getElementById("llmRecommendation")
+            .textContent =
+            result.recommendation;
+
+
+        /* WEB VERIFICATION */
+
+        document
+            .getElementById(
+                "llmWebVerification"
+            )
+            .textContent =
+            result.web_verification;
+
+
+        /* URLS */
+
+        const urls =
+            document.getElementById(
+                "llmUrls"
+            );
+
+
+        urls.innerHTML = "";
+
+
+        if (
+            !result.urls ||
+            result.urls.length === 0
+        ) {
+
+            urls.innerHTML =
+                "<li>No URLs detected</li>";
+
+        }
+
+        else {
+
+            result.urls.forEach(
+                item => {
+
+                    const li =
+                        document.createElement(
+                            "li"
+                        );
+
+
+                    li.textContent =
+                        `${item.url} — ${
+                            item.status
+                        } — Risk: ${
+                            item.score
+                        }/100`;
+
+
+                    urls.appendChild(li);
+
+                }
+            );
+
+        }
+
+
+        /* SOURCES */
+
+        const sources =
+            document.getElementById(
+                "llmSources"
+            );
+
+
+        sources.innerHTML = "";
+
+
+        if (
+            !result.sources ||
+            result.sources.length === 0
+        ) {
+
+            sources.innerHTML =
+                "<li>No external sources used.</li>";
+
+        }
+
+        else {
+
+            result.sources.forEach(
+                source => {
+
+                    const li =
+                        document.createElement(
+                            "li"
+                        );
+
+
+                    const link =
+                        document.createElement(
+                            "a"
+                        );
+
+
+                    link.href =
+                        source;
+
+                    link.target =
+                        "_blank";
+
+                    link.rel =
+                        "noopener noreferrer";
+
+                    link.textContent =
+                        source;
+
+
+                    li.appendChild(link);
+
+                    sources.appendChild(li);
+
+                }
+            );
+
+        }
+
+
+        document
+            .getElementById("llmResult")
+            .scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+    }
+
+
+    catch (error) {
+
+        console.error(
+            "LLM Error:",
+            error
+        );
+
+        alert(
+            "Unable to connect to the LLM service."
+        );
+
+    }
+
+
+    finally {
+
+        button.disabled = false;
+
+        button.textContent =
+            "🧠 AI Security Scan";
+
+    }
+
+}
+
+
+/* =========================================
+   HISTORY
+========================================= */
+
+function saveToHistory(
+    message,
+    result
+) {
+
+
+    let history =
+        JSON.parse(
+            localStorage.getItem(
+                "scamoraHistory"
+            )
+        ) || [];
+
+
+    const historyItem = {
+
+        message: message,
+
+        risk_score:
+            result.risk_score,
+
+        threat_level:
+            result.threat_level,
+
+        classification:
+            result.classification,
+
+        ai_confidence:
+            result.ai_confidence,
+
+        time:
+            new Date().toLocaleTimeString(
+                [],
+                {
+                    hour: "2-digit",
+                    minute: "2-digit"
+                }
+            )
+
+    };
+
+
+    history.unshift(
+        historyItem
+    );
+
+
+    history =
+        history.slice(0, 10);
+
+
+    localStorage.setItem(
+        "scamoraHistory",
+        JSON.stringify(history)
+    );
+
+
+    displayHistory();
+
+}
+
+
+/* =========================================
+   DISPLAY HISTORY
+========================================= */
+
+function displayHistory() {
+
+
+    const historyList =
+        document.getElementById(
+            "historyList"
+        );
+
+
+    let history =
+        JSON.parse(
+            localStorage.getItem(
+                "scamoraHistory"
+            )
+        ) || [];
+
+
+    if (
+        history.length === 0
+    ) {
+
+        historyList.innerHTML = `
+
+            <p class="empty-history">
+                No messages analyzed yet.
+            </p>
+
+        `;
+
+        return;
+
+    }
+
+
+    historyList.innerHTML = "";
+
+
+    history.forEach(
+        item => {
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "history-item";
+
+
+            let statusClass =
+                "safe";
+
+
+            if (
+                item.threat_level ===
+                "HIGH"
+            ) {
+
+                statusClass =
+                    "high";
+
+            }
+
+            else if (
+                item.threat_level ===
+                "MEDIUM"
+            ) {
+
+                statusClass =
+                    "medium";
+
+            }
+
+
+            card.innerHTML = `
+
+                <div>
+
+                    <div class="history-message">
+
+                        ${escapeHTML(
+                            item.message
+                        )}
+
+                    </div>
+
+
+                    <div class="history-meta">
+
+                        <span>
+                            ${item.time}
+                        </span>
+
+                        <span>
+                            AI Confidence:
+                            ${item.ai_confidence}%
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="history-result">
+
+                    <span
+                        class="history-class ${statusClass}"
+                    >
+
+                        ${item.classification}
+
+                    </span>
+
+
+                    <strong>
+
+                        ${item.risk_score}/100
+
+                    </strong>
+
+                </div>
+
+            `;
+
+
+            historyList.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   DASHBOARD
+========================================= */
+
+function updateDashboard() {
+
+
+    const history =
+        JSON.parse(
+            localStorage.getItem(
+                "scamoraHistory"
+            )
+        ) || [];
+
+
+    document
+        .getElementById(
+            "totalAnalyzed"
+        )
+        .textContent =
+        history.length;
+
+
+    const threats =
+        history.filter(
+            item =>
+                item.threat_level ===
+                    "HIGH" ||
+                item.threat_level ===
+                    "MEDIUM"
+        ).length;
+
+
+    document
+        .getElementById(
+            "threatsDetected"
+        )
+        .textContent =
+        threats;
+
+
+    const safe =
+        history.filter(
+            item =>
+                item.classification ===
+                "SAFE"
+        ).length;
+
+
+    document
+        .getElementById(
+            "safeMessages"
+        )
+        .textContent =
+        safe;
+
+
+    let averageRisk = 0;
+
+
+    if (
+        history.length > 0
+    ) {
+
+        const totalRisk =
+            history.reduce(
+                (
+                    sum,
+                    item
+                ) =>
+                    sum +
+                    Number(
+                        item.risk_score
+                    ),
+                0
+            );
+
+
+        averageRisk =
+            Math.round(
+                totalRisk /
+                history.length
+            );
+
+    }
+
+
+    document
+        .getElementById(
+            "averageRisk"
+        )
+        .textContent =
+        averageRisk;
+
+}
+
+
+/* =========================================
+   CLEAR HISTORY
+========================================= */
+
+function clearHistory() {
+
+
+    const history =
+        JSON.parse(
+            localStorage.getItem(
+                "scamoraHistory"
+            )
+        ) || [];
+
+
+    if (
+        history.length === 0
+    ) {
+
+        return;
+
+    }
+
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to clear your detection history?"
+        );
+
+
+    if (!confirmed) {
+
+        return;
+
+    }
+
+
+    localStorage.removeItem(
+        "scamoraHistory"
+    );
+
+
+    displayHistory();
+
+    updateDashboard();
+
+}
+
+
+/* =========================================
+   SAFE HTML
+========================================= */
+
+function escapeHTML(
+    text
+) {
+
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        text;
+
+
+    return div.innerHTML;
+
+}
+
+
+/* =========================================
+   CLEAR CURRENT ANALYSIS
+========================================= */
+
+function clearAnalysis() {
+
+
+    document
+        .getElementById(
+            "message"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "result"
+        )
+        .classList
+        .add("hidden");
+
+
+    document
+        .getElementById(
+            "llmResult"
+        )
+        .classList
+        .add("hidden");
+
+
+    document
+        .getElementById(
+            "riskScore"
+        )
+        .textContent =
+        "0";
+
+
+    document
+        .getElementById(
+            "riskBar"
+        )
+        .style.width =
+        "0%";
+
+
+    document
+        .getElementById(
+            "llmRiskScore"
+        )
+        .textContent =
+        "0";
+
+
+    document
+        .getElementById(
+            "llmRiskBar"
+        )
+        .style.width =
+        "0%";
+
+
+    document
+        .getElementById(
+            "threatLevel"
+        )
+        .textContent =
+        "-";
+
+
+    document
+        .getElementById(
+            "classification"
+        )
+        .textContent =
+        "-";
+
+
+    document
+        .getElementById(
+            "aiConfidence"
+        )
+        .textContent =
+        "0";
+
+
+    document
+        .getElementById(
+            "llmThreatLevel"
+        )
+        .textContent =
+        "-";
+
+
+    document
+        .getElementById(
+            "llmClassification"
+        )
+        .textContent =
+        "-";
+
+
+    document
+        .getElementById(
+            "llmConfidence"
+        )
+        .textContent =
+        "0";
+
+
+    document
+        .getElementById(
+            "redFlags"
+        )
+        .innerHTML =
+        "";
+
+
+    document
+        .getElementById(
+            "llmRedFlags"
+        )
+        .innerHTML =
+        "";
+
+
+    document
+        .getElementById(
+            "why"
+        )
+        .textContent =
+        "";
+
+
+    document
+        .getElementById(
+            "llmWhy"
+        )
+        .textContent =
+        "";
+
+
+    document
+        .getElementById(
+            "recommendation"
+        )
+        .textContent =
+        "";
+
+
+    document
+        .getElementById(
+            "llmRecommendation"
+        )
+        .textContent =
+        "";
+
+
+    document
+        .getElementById(
+            "llmWebVerification"
+        )
+        .textContent =
+        "";
+
+
+    document
+        .getElementById(
+            "urls"
+        )
+        .innerHTML =
+        "";
+
+
+    document
+        .getElementById(
+            "llmUrls"
+        )
+        .innerHTML =
+        "";
+
+
+    document
+        .getElementById(
+            "llmSources"
+        )
+        .innerHTML =
+        "";
+
+
+    document
+        .getElementById(
+            "message"
+        )
+        .scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+}
+
+
+/* =========================================
+   DEMO EXAMPLES
+========================================= */
+
+function useExample(
+    type
+) {
+
+
+    const messageBox =
+        document.getElementById(
+            "message"
+        );
+
+
+    if (
+        type === "safe"
+    ) {
+
+        messageBox.value =
+            "Hey, are you coming to college tomorrow? The class starts at 10 AM.";
+
+    }
+
+
+    else if (
+        type === "scam"
+    ) {
+
+        messageBox.value =
+            "Congratulations! You have won ₹50,000. Pay a small processing fee to receive your prize.";
+
+    }
+
+
+    else if (
+        type === "phishing"
+    ) {
+
+        messageBox.value =
+            "URGENT! Your SBI bank account will be blocked. Verify your account immediately: http://secure-bank-login.xyz";
+
+    }
+
+
+    messageBox.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+
+    messageBox.focus();
+
+}
+
+
+/* =========================================
+   PAGE LOAD
+========================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        displayHistory();
+
+        updateDashboard();
+
+    }
+);
+
+</script>
+
 
 </body>
 
